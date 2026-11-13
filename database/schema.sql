@@ -44,11 +44,14 @@ CREATE TABLE user_plants (
 );
 
 -- 5. Watering schedules table
+-- Added frequency unit for different watering schedules
+
 CREATE TABLE watering_schedules (
     schedule_id INT AUTO_INCREMENT PRIMARY KEY,
     user_plant_id INT NOT NULL,
     watering_frequency INT NOT NULL,
-    next_watering_date DATE,
+    frequency_unit VARCHAR(20) NOT NULL,
+    next_watering_date DATETIME,
     FOREIGN KEY (user_plant_id)
         REFERENCES user_plants(user_plant_id)
 );
@@ -73,4 +76,31 @@ CREATE TABLE plant_health_records (
     record_date DATE NOT NULL,
     FOREIGN KEY (user_plant_id)
         REFERENCES user_plants(user_plant_id)
+);
+
+-- 8. Plant care recommendations table
+
+CREATE TABLE plant_care_recommendations (
+    recommendation_id INT AUTO_INCREMENT PRIMARY KEY,
+    plant_id INT NOT NULL,
+    care_type VARCHAR(50) NOT NULL,
+    frequency VARCHAR(100),
+    instructions TEXT,
+    FOREIGN KEY (plant_id)
+        REFERENCES plants(plant_id)
+);
+
+-- 9. Notifications table
+
+CREATE TABLE notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    schedule_id INT,
+    notification_message TEXT NOT NULL,
+    notification_date DATETIME,
+    is_read BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id),
+    FOREIGN KEY (schedule_id)
+        REFERENCES watering_schedules(schedule_id)
 );
