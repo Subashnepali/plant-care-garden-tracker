@@ -30,3 +30,10 @@ Checking previous care records.
 Recording plant health problems and tracking changes over time.
 
 This database will help users stay organized and remember the care their plants need.
+
+4. Entity Relationship Diagram (ERD)
+
+The following diagram shows the database structure of my Plant Care and Garden Tracker project. It includes the nine database tables, their primary keys, foreign keys, and relationships.
+
+![Plant Care and Garden Tracker ERD](database/Diagrams/Plant_Care_Garden_Tracker.png)
+
